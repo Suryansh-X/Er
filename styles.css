@@ -1,12 +1,22 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { background: #000; color: #D4AF37; font-family: 'Segoe UI', sans-serif; }
+body { background: #000; color: #D4AF37; font-family: sans-serif; overflow-x: hidden; }
 
+/* Progress Bar */
+.progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: #8B0000; width: 0%; z-index: 9999; }
+
+/* Header & Video */
 #home { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; }
 #bg-video { position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1; }
-.overlay { text-align: center; background: rgba(0,0,0,0.5); padding: 50px; border: 2px solid #8B0000; }
+.overlay { text-align: center; background: rgba(0,0,0,0.6); padding: 50px; border: 2px solid #8B0000; }
 
-h1 { font-size: 3.5rem; letter-spacing: 2px; text-transform: uppercase; }
-.btn { background: #8B0000; color: #fff; border: none; padding: 15px 30px; cursor: pointer; font-size: 1rem; margin-top: 20px; }
+h1 { font-size: 3.5rem; text-transform: uppercase; }
+.btn { background: #8B0000; color: #fff; border: none; padding: 15px 30px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
+.btn:hover { background: #ff4500; transform: scale(1.1); }
+
+/* Gallery */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+.gallery-item { width: 100%; height: 250px; object-fit: cover; border: 2px solid #D4AF37; transition: 0.5s; cursor: pointer; }
+.gallery-item:hover { transform: scale(1.08) rotate(1deg); border-color: #8B0000; }
 
-#insta { padding: 50px 20px; border-top: 2px solid #8B0000; }
+/* Social Bar */
+.social-bar { position: fixed; right: 20px; top: 50%; display: flex; flex-direction: column; gap: 15px; }
