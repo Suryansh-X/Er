@@ -1,35 +1,39 @@
 // ਪੰਜਾਬੀ ਅੱਖਰਾਂ ਵਾਲੇ ਪਾਰਟੀਕਲ
-const canvas = document.getElementById('punjabiParticles');
+const canvas = document.getElementById('electronCanvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const letters = "ੳਅੲਸਹਕਖਗਘਙਚਛਜਝਞਟਠਡਢਣਤਥਦਧਨਪਫਬਭਮਯਰਲਵੜ".split("");
+const letters = "ੳਅੲਸਹਕਖਗਘਚਛਜਝਟਠਡਢਤਥਦਧਨਪਫਬਭਮਯਰਲਵੜ".split("");
 let particles = [];
 
-function createParticle() {
-    return {
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        char: letters[Math.floor(Math.random() * letters.length)],
-        size: Math.random() * 20 + 10,
-        speed: Math.random() * 0.5 + 0.2
-    };
+function init() {
+    for(let i=0; i<80; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            char: letters[Math.floor(Math.random() * letters.length)],
+            speed: Math.random() * 5 + 2,
+            hue: Math.random() * 360
+        });
+    }
 }
 
-for(let i=0; i<40; i++) particles.push(createParticle());
-
 function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => {
-        ctx.font = p.size + "px serif";
-        ctx.fillStyle = "rgba(255, 255, 255, 0.1)";
+        ctx.fillStyle = `hsl(${p.hue}, 100%, 50%)`;
+        ctx.font = "20px Arial";
         ctx.fillText(p.char, p.x, p.y);
-        p.y += p.speed;
-        if(p.y > canvas.height) p.y = 0;
+        p.y -= p.speed;
+        if(p.y < 0) p.y = canvas.height;
+        p.x += Math.sin(p.y * 0.05) * 2;
     });
     requestAnimationFrame(animate);
 }
+
+init();
 animate();
 
 // ਗੈਲਰੀ ਫੰਕਸ਼ਨ
