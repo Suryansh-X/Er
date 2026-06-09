@@ -2,41 +2,77 @@
 <html lang="pa">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ਹਰਤੇਜ ਬਰਿਆਣਾ | Official Portfolio</title>
+    <title>ਹਰਤੇਜ ਬਰਿਆਣਾ | Cyber Punjabi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { margin: 0; background: #000; color: #fff; font-family: sans-serif; overflow-x: hidden; }
+        body { margin: 0; background: #000; color: #fff; overflow-x: hidden; }
+        canvas { position: fixed; top: 0; left: 0; z-index: 0; }
         
-        /* ਕਲਰ ਹਿਊ ਐਨੀਮੇਸ਼ਨ (ਬਿਨਾਂ RGB) */
-        @keyframes hueRotate { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
-        .animated-bg { animation: hueRotate 20s infinite linear; }
+        /* ਨਾਮ ਲਈ Cyber-Glow Effect */
+        .name-glow {
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 40px #ff00de, 0 0 80px #ff00de;
+            animation: pulse 1.5s infinite alternate;
+        }
+        @keyframes pulse { from { opacity: 0.7; } to { opacity: 1; } }
         
-        /* ਨਾਮ ਦਾ ਐਨੀਮੇਸ਼ਨ (White to Black) */
-        @keyframes nameShift { 0%, 100% { color: #fff; } 50% { color: #000; text-shadow: 0 0 10px #fff; } }
-        .name-anim { animation: nameShift 5s infinite ease-in-out; }
-
-        canvas { position: fixed; top: 0; left: 0; z-index: -1; }
-        .gold-border { border: 2px solid #D4AF37; }
+        .content { position: relative; z-index: 1; }
+        .insta-container { background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; }
     </style>
 </head>
-<body class="animated-bg">
+<body class="flex flex-col items-center">
 
-    <canvas id="punjabiParticles"></canvas>
+    <canvas id="electronCanvas"></canvas>
 
-    <header class="h-screen flex flex-col items-center justify-center text-center">
-        <h1 class="text-8xl font-bold uppercase name-anim transition-all">ਹਰਤੇਜ ਬਰਿਆਣਾ</h1>
+    <div class="content text-center h-screen flex flex-col justify-center items-center">
+        <h1 class="text-9xl font-bold uppercase name-glow">ਹਰਤੇਜ ਬਰਿਆਣਾ</h1>
         <p class="mt-5 text-2xl tracking-[0.3em] opacity-90">ਪੰਜਾਬੀ ਵਿਰਸਾ • ਇਤਿਹਾਸ • ਮਸ਼ੀਨਰੀ</p>
-    </header>
+    </div>
 
-    <section id="gallery" class="py-20 bg-black/60">
-        <h2 class="text-4xl text-center mb-10 font-bold">ਯਾਦਗਾਰੀ ਤਸਵੀਰਾਂ</h2>
-        <div id="grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 px-10"></div>
-        <div class="text-center mt-12">
-            <button onclick="accessGallery()" class="bg-red-800 text-white px-10 py-4 rounded font-bold hover:scale-110 transition">ਅੱਪਲੋਡ ਪੈਨਲ</button>
-        </div>
-    </section>
+    <div class="content insta-container w-11/12 md:w-1/2 mb-20 text-center">
+        <h2 class="text-3xl font-bold mb-6">ਇੰਸਟਾਗ੍ਰਾਮ</h2>
+        <div class='sk-instagram-feed' data-embed-id='25688213'></div>
+        <script src='https://widgets.sociablekit.com/instagram-feed/widget.js' async defer></script>
+    </div>
 
-    <script src="script.js"></script>
+    <script>
+        const canvas = document.getElementById('electronCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = "ੳਅੲਸਹਕਖਗਘਚਛਜਝਟਠਡਢਤਥਦਧਨਪਫਬਭਮਯਰਲਵੜ".split("");
+        let particles = [];
+
+        function init() {
+            for(let i=0; i<80; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    char: letters[Math.floor(Math.random() * letters.length)],
+                    speed: Math.random() * 5 + 2,
+                    hue: Math.random() * 360
+                });
+            }
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(0,0,0,0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(p => {
+                ctx.fillStyle = `hsl(${p.hue}, 100%, 50%)`;
+                ctx.font = "20px Arial";
+                ctx.fillText(p.char, p.x, p.y);
+                
+                p.y -= p.speed;
+                if(p.y < 0) p.y = canvas.height;
+                p.x += Math.sin(p.y * 0.05) * 2;
+            });
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+    </script>
 </body>
 </html>
