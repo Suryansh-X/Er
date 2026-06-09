@@ -1,68 +1,42 @@
 <!DOCTYPE html>
-<html lang="pa" class="scroll-smooth">
+<html lang="pa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ਹਰਤੇਜ ਬਰਿਆਣਾ | Official Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        body { background-color: #000; color: #D4AF37; }
+        body { margin: 0; background: #000; color: #fff; font-family: sans-serif; overflow-x: hidden; }
+        
+        /* ਕਲਰ ਹਿਊ ਐਨੀਮੇਸ਼ਨ (ਬਿਨਾਂ RGB) */
+        @keyframes hueRotate { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
+        .animated-bg { animation: hueRotate 20s infinite linear; }
+        
+        /* ਨਾਮ ਦਾ ਐਨੀਮੇਸ਼ਨ (White to Black) */
+        @keyframes nameShift { 0%, 100% { color: #fff; } 50% { color: #000; text-shadow: 0 0 10px #fff; } }
+        .name-anim { animation: nameShift 5s infinite ease-in-out; }
+
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; }
         .gold-border { border: 2px solid #D4AF37; }
-        .red-bg { background-color: #8B0000; }
-        #bg-video { position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; z-index: -1; object-fit: cover; filter: brightness(0.3); }
     </style>
 </head>
-<body>
+<body class="animated-bg">
 
-    <video autoplay muted loop playsinline id="bg-video">
-        <source src="tractor-video.mp4" type="video/mp4">
-    </video>
-    <audio id="tumbi" src="tumbi.mp3" loop></audio>
+    <canvas id="punjabiParticles"></canvas>
 
-    <header class="h-screen flex flex-col items-center justify-center text-center" data-aos="fade-down" data-aos-duration="1500">
-        <h1 class="text-7xl font-bold uppercase tracking-widest border-b-4 border-red-800 pb-4">ਹਰਤੇਜ ਬਰਿਆਣਾ</h1>
-        <p class="text-2xl mt-6 font-semibold">ਪੰਜਾਬੀ ਵਿਰਸਾ | ਖੇਤੀਬਾੜੀ | ਮਸ਼ੀਨਰੀ</p>
+    <header class="h-screen flex flex-col items-center justify-center text-center">
+        <h1 class="text-8xl font-bold uppercase name-anim transition-all">ਹਰਤੇਜ ਬਰਿਆਣਾ</h1>
+        <p class="mt-5 text-2xl tracking-[0.3em] opacity-90">ਪੰਜਾਬੀ ਵਿਰਸਾ • ਇਤਿਹਾਸ • ਮਸ਼ੀਨਰੀ</p>
     </header>
 
-    <section id="gallery" class="py-20 bg-black/80" data-aos="fade-up" data-aos-duration="1500">
-        <h2 class="text-4xl text-center mb-10 uppercase font-bold">ਯਾਦਗਾਰੀ ਤਸਵੀਰਾਂ</h2>
+    <section id="gallery" class="py-20 bg-black/60">
+        <h2 class="text-4xl text-center mb-10 font-bold">ਯਾਦਗਾਰੀ ਤਸਵੀਰਾਂ</h2>
         <div id="grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 px-10"></div>
         <div class="text-center mt-12">
-            <button onclick="accessGallery()" class="red-bg text-white px-10 py-4 rounded font-bold hover:scale-110 transition shadow-[0_0_20px_#8B0000]">ਅੱਪਲੋਡ ਪੈਨਲ</button>
+            <button onclick="accessGallery()" class="bg-red-800 text-white px-10 py-4 rounded font-bold hover:scale-110 transition">ਅੱਪਲੋਡ ਪੈਨਲ</button>
         </div>
     </section>
 
-    <section id="insta" class="py-20 bg-black/90" data-aos="fade-up" data-aos-duration="1500">
-        <h2 class="text-4xl text-center mb-10 uppercase font-bold">ਇੰਸਟਾਗ੍ਰਾਮ</h2>
-        <div class="sk-instagram-feed" data-embed-id="25688213"></div>
-        <script src="https://widgets.sociablekit.com/instagram-feed/widget.js" defer></script>
-    </section>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-        document.addEventListener('click', () => { document.getElementById("tumbi").play(); }, { once: true });
-        
-        function accessGallery() {
-            let pass = prompt("ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ:");
-            if (pass === "gohartej#£89") window.location.href = "upload.html";
-            else alert("ਗਲਤ ਪਾਸਵਰਡ!");
-        }
-
-        function displayGallery(files) {
-            const grid = document.getElementById('grid');
-            for (let file of files) {
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    let img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'w-full h-72 object-cover gold-border hover:scale-105 transition duration-500 cursor-pointer';
-                    grid.appendChild(img);
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
