@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>ਅੱਪਲੋਡ ਪੈਨਲ</title>
-    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body style="padding: 50px; text-align: center;">
-    <h1>ਫੋਟੋਆਂ ਚੁਣੋ</h1>
-    <input type="file" id="file" accept="image/*" multiple onchange="uploadFiles(this.files)">
-    <br><br>
-    <a href="index.html" class="btn">ਵਾਪਸ ਜਾਓ</a>
+<body class="bg-black text-yellow-600 flex flex-col items-center justify-center h-screen">
+    <h1 class="text-4xl mb-6 font-bold uppercase">ਫੋਟੋਆਂ ਚੁਣੋ</h1>
+    <input type="file" id="file" accept="image/*" multiple onchange="uploadFiles(this.files)" class="mb-6 border border-yellow-600 p-2">
+    <a href="index.html" class="bg-red-800 text-white px-8 py-3 rounded font-bold hover:scale-105 transition">ਵਾਪਸ ਜਾਓ</a>
+
     <script>
         function uploadFiles(files) {
-            window.opener.displayGallery(files);
-            alert("ਫੋਟੋਆਂ ਗੈਲਰੀ ਵਿੱਚ ਜੁੜ ਗਈਆਂ!");
+            if (window.opener) {
+                window.opener.displayGallery(files);
+                alert("ਫੋਟੋਆਂ ਗੈਲਰੀ ਵਿੱਚ ਸਫਲਤਾਪੂਰਵਕ ਜੁੜ ਗਈਆਂ!");
+            } else {
+                alert("ਕਿਰਪਾ ਕਰਕੇ ਮੁੱਖ ਪੇਜ ਤੋਂ ਅੱਪਲੋਡ ਪੈਨਲ ਖੋਲ੍ਹੋ।");
+            }
         }
     </script>
 </body>
