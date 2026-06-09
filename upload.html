@@ -6,9 +6,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body style="padding: 50px; text-align: center;">
-    <h1>ਆਪਣੀਆਂ ਫੋਟੋਆਂ ਚੁਣੋ</h1>
-    <input type="file" id="file" accept="image/*" multiple onchange="alert('ਫੋਟੋਆਂ ਅੱਪਲੋਡ ਲਈ ਤਿਆਰ ਹਨ!')">
+    <h1>ਫੋਟੋਆਂ ਚੁਣੋ</h1>
+    <input type="file" id="file" accept="image/*" multiple onchange="uploadFiles(this.files)">
     <br><br>
     <a href="index.html" class="btn">ਵਾਪਸ ਜਾਓ</a>
+    <script>
+        function uploadFiles(files) {
+            window.opener.displayGallery(files);
+            alert("ਫੋਟੋਆਂ ਗੈਲਰੀ ਵਿੱਚ ਜੁੜ ਗਈਆਂ!");
+        }
+    </script>
 </body>
 </html>
