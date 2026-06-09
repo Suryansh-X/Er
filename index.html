@@ -26,18 +26,24 @@
     </header>
 
     <section id="gallery" class="py-20 bg-black/80" data-aos="fade-up" data-aos-duration="1500">
-        <h2 class="text-4xl text-center mb-10 uppercase font-bold">ਮੇਰੀਆਂ ਯਾਦਗਾਰੀ ਤਸਵੀਰਾਂ</h2>
+        <h2 class="text-4xl text-center mb-10 uppercase font-bold">ਯਾਦਗਾਰੀ ਤਸਵੀਰਾਂ</h2>
         <div id="grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 px-10"></div>
         <div class="text-center mt-12">
-            <button onclick="accessGallery()" class="red-bg text-white px-10 py-4 rounded font-bold hover:scale-110 transition duration-300 shadow-[0_0_20px_#8B0000]">ਅੱਪਲੋਡ ਪੈਨਲ</button>
+            <button onclick="accessGallery()" class="red-bg text-white px-10 py-4 rounded font-bold hover:scale-110 transition shadow-[0_0_20px_#8B0000]">ਅੱਪਲੋਡ ਪੈਨਲ</button>
         </div>
+    </section>
+
+    <section id="insta" class="py-20 bg-black/90" data-aos="fade-up" data-aos-duration="1500">
+        <h2 class="text-4xl text-center mb-10 uppercase font-bold">ਇੰਸਟਾਗ੍ਰਾਮ</h2>
+        <div class="sk-instagram-feed" data-embed-id="25688213"></div>
+        <script src="https://widgets.sociablekit.com/instagram-feed/widget.js" defer></script>
     </section>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init();
         document.addEventListener('click', () => { document.getElementById("tumbi").play(); }, { once: true });
-
+        
         function accessGallery() {
             let pass = prompt("ਪਾਸਵਰਡ ਦਰਜ ਕਰੋ:");
             if (pass === "gohartej#£89") window.location.href = "upload.html";
