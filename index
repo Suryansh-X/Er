@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ਹਰਤੇਜ ਬਰਿਆਣਾ | Official</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header id="home">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="assets/tractor-video.mp4" type="video/mp4">
+        </video>
+        <div class="overlay">
+            <h1>ਹਰਤੇਜ ਬੜਿਆਣਾ</h1>
+            <p>ਪੰਜਾਬੀ ਵਿਰਸਾ | ਖੇਤੀਬਾੜੀ | ਮਸ਼ੀਨਰੀ</p>
+            <button onclick="playMusic()">ਤੁੰਬੀ ਦੀ ਤਰਜ਼ ਸੁਣੋ</button>
+            <audio id="tumbi" src="assets/tumbi.mp3"></audio>
+        </div>
+    </header>
+
+    <section id="gallery">
+        <h2>ਮੇਰੀਆਂ ਯਾਦਗਾਰੀ ਤਸਵੀਰਾਂ</h2>
+        <div class="grid" id="grid">
+            </div>
+        <button class="btn" onclick="accessGallery()">ਅੱਪਲੋਡ ਪੈਨਲ</button>
+    </section>
+
+    <section id="insta">
+        <h2>ਇੰਸਟਾਗ੍ਰਾਮ</h2>
+        <div class="sk-instagram-feed" data-embed-id="25688213"></div>
+        <script src="https://widgets.sociablekit.com/instagram-feed/widget.js" defer></script>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
